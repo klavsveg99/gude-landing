@@ -1180,7 +1180,12 @@ footer {
     }
     
     .footer-contact {
+        flex-direction: column;
         justify-content: center;
+    }
+    
+    .footer-info {
+        align-items: center;
     }
     
     .hero-wrapper {
