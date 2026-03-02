@@ -123,6 +123,22 @@ if (contactForm) {
     });
 }
 
+const logoLink = document.querySelector('.logo');
+const footerLogo = document.querySelector('.footer-logo-img');
+
+function scrollToTop(e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+if (logoLink) {
+    logoLink.addEventListener('click', scrollToTop);
+}
+
+if (footerLogo) {
+    footerLogo.addEventListener('click', scrollToTop);
+}
+
 const animatedElements = document.querySelectorAll('.section, footer, .cta-section, .features-grid, .quality-grid, .products-grid, .logistics-grid, .contacts-grid, .stat-item, .feature-card, .quality-item, .product-card, .logistics-card, .contact-card, .hours-card, .tech-specs, .spec-card, .cta-box, .map-placeholder, .map-locations');
 
 const observer = new IntersectionObserver((entries) => {
