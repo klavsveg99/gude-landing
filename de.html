@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="2.0.1">
     <title>GUDE — Hochwertiges Kaminholz</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.v3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -141,10 +145,10 @@
                     <div class="product-content">
                         <h3>Eschenholz</h3>
                         <ul>
-                            <li>Hartholzart</li>
-                            <li>Resistent gegen Schädlinge</li>
-                            <li>Maximale Wärmeleistung</li>
-                            <li>Gelblich-weiße Farbe</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Hartholzart</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Resistent gegen Schädlinge</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Maximale Wärmeleistung</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Gelblich-weiße Farbe</span></li>
                         </ul>
                     </div>
                 </div>
@@ -154,10 +158,10 @@
                     <div class="product-content">
                         <h3>Eichenholz</h3>
                         <ul>
-                            <li>Hartholzart</li>
-                            <li>Dunkelbraunes Kernholz</li>
-                            <li>Resistent gegen Fäulnis</li>
-                            <li>Hohe Wärmeleistung</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Hartholzart</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Dunkelbraunes Kernholz</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Resistent gegen Fäulnis</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Hohe Wärmeleistung</span></li>
                         </ul>
                     </div>
                 </div>
@@ -167,10 +171,10 @@
                     <div class="product-content">
                         <h3>Erlenholz</h3>
                         <ul>
-                            <li>Helles gelbes Holz</li>
-                            <li>Hohe Hitze beim Brennen</li>
-                            <li>Fast kein Rauch</li>
-                            <li>Behält Aroma</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Helles gelbes Holz</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Hohe Hitze beim Brennen</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Fast kein Rauch</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Behält Aroma</span></li>
                         </ul>
                     </div>
                 </div>
@@ -180,10 +184,10 @@
                     <div class="product-content">
                         <h3>Birkenholz</h3>
                         <ul>
-                            <li>Leicht anzuzünden</li>
-                            <li>Lange, gleichmäßige Flamme</li>
-                            <li>Mittlere Wärmeleistung</li>
-                            <li>Keine Funken</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Leicht anzuzünden</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Lange, gleichmäßige Flamme</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Mittlere Wärmeleistung</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Keine Funken</span></li>
                         </ul>
                     </div>
                 </div>
@@ -406,7 +410,7 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=2.0.1"></script>
     <script>
         function initMap() {
             const locations = [
@@ -418,10 +422,10 @@
                     phone: '+371 28636469'
                 },
                 { 
-                    lat: 56.6235, 
-                    lng: 22.4789, 
+                    lat: 56.5189167, 
+                    lng: 22.3931944, 
                     title: 'Produktion',
-                    address: '"Jaunērgļi", Kursīški, Saldus Municipality, LV-3890',
+                    address: '"Jaunērgļi", Kursīši, Saldus Municipality, LV-3890',
                     phone: ''
                 }
             ];
@@ -430,7 +434,7 @@
             const centerLng = locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length;
             
             const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
+                zoom: 10,
                 center: { lat: centerLat, lng: centerLng },
                 styles: [
                     { elementType: 'geometry', stylers: [{ color: '#f4f1ea' }] },

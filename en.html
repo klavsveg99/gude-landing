@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="2.0.1">
     <title>GUDE — Premium Firewood</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.v3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -141,10 +145,10 @@
                     <div class="product-content">
                         <h3>Ash Firewood</h3>
                         <ul>
-                            <li>Hardwood species</li>
-                            <li>Resistant to pests</li>
-                            <li>Maximum heat output</li>
-                            <li>Yellowish-white cream color</li>
+<li><i class="fa-solid fa-arrow-right"></i><span>Hardwood species</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Resistant to pests</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Maximum heat output</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Yellowish-white cream color</span></li>
                         </ul>
                     </div>
                 </div>
@@ -154,10 +158,10 @@
                     <div class="product-content">
                         <h3>Oak Firewood</h3>
                         <ul>
-                            <li>Hardwood species</li>
-                            <li>Dark brown heartwood</li>
-                            <li>Rot-resistant</li>
-                            <li>High heat output</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Hardwood species</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Dark brown heartwood</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Rot-resistant</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>High heat output</span></li>
                         </ul>
                     </div>
                 </div>
@@ -167,10 +171,10 @@
                     <div class="product-content">
                         <h3>Alder Firewood</h3>
                         <ul>
-                            <li>Light yellow wood</li>
-                            <li>High heat when burning</li>
-                            <li>Almost no smoke</li>
-                            <li>Retains aroma</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Light yellow wood</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>High heat when burning</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Almost no smoke</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Retains aroma</span></li>
                         </ul>
                     </div>
                 </div>
@@ -180,10 +184,10 @@
                     <div class="product-content">
                         <h3>Birch Firewood</h3>
                         <ul>
-                            <li>Easy to ignite</li>
-                            <li>Long, even flame</li>
-                            <li>Medium heat output</li>
-                            <li>No sparks</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Easy to ignite</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Long, even flame</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Medium heat output</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>No sparks</span></li>
                         </ul>
                     </div>
                 </div>
@@ -406,7 +410,7 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=2.0.1"></script>
     <script>
         function initMap() {
             const locations = [
@@ -418,10 +422,10 @@
                     phone: '+371 28636469'
                 },
                 { 
-                    lat: 56.6235, 
-                    lng: 22.4789, 
+                    lat: 56.5189167, 
+                    lng: 22.3931944, 
                     title: 'Production',
-                    address: '"Jaunērgļi", Kursīški, Saldus Municipality, LV-3890',
+                    address: '"Jaunērgļi", Kursīši, Saldus Municipality, LV-3890',
                     phone: ''
                 }
             ];
@@ -430,7 +434,7 @@
             const centerLng = locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length;
             
             const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
+                zoom: 10,
                 center: { lat: centerLat, lng: centerLng },
                 styles: [
                     { elementType: 'geometry', stylers: [{ color: '#f4f1ea' }] },

@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="2.0.1">
     <title>GUDE — Качественные Дрова</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.v3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -141,10 +145,10 @@
                     <div class="product-content">
                         <h3>Ясеневые дрова</h3>
                         <ul>
-                            <li>Твёрдолиственная порода</li>
-                            <li>Устойчив к вредителям</li>
-                            <li>Максимальная теплоотдача</li>
-                            <li>Желтовато-белый цвет</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Твёрдолиственная порода</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Устойчив к вредителям</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Максимальная теплоотдача</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Желтовато-белый цвет</span></li>
                         </ul>
                     </div>
                 </div>
@@ -154,10 +158,10 @@
                     <div class="product-content">
                         <h3>Дубовые дрова</h3>
                         <ul>
-                            <li>Твёрдолиственная порода</li>
-                            <li>Тёмно-коричневая ядровая древесина</li>
-                            <li>Устойчив к гниению</li>
-                            <li>Большая теплоотдача</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Твёрдолиственная порода</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Тёмно-коричневая ядровая древесина</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Устойчив к гниению</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Большая теплоотдача</span></li>
                         </ul>
                     </div>
                 </div>
@@ -167,10 +171,10 @@
                     <div class="product-content">
                         <h3>Ольховые дрова</h3>
                         <ul>
-                            <li>Светло-жёлтая древесина</li>
-                            <li>Высокая жаропроизводительность</li>
-                            <li>Практически без дыма</li>
-                            <li>Сохраняет аромат</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Светло-жёлтая древесина</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Высокая жаропроизводительность</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Практически без дыма</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Сохраняет аромат</span></li>
                         </ul>
                     </div>
                 </div>
@@ -180,10 +184,10 @@
                     <div class="product-content">
                         <h3>Берёзовые дрова</h3>
                         <ul>
-                            <li>Легко разжигаются</li>
-                            <li>Длинное ровное пламя</li>
-                            <li>Средняя теплоотдача</li>
-                            <li>Не искрит</li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Легко разжигаются</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Длинное ровное пламя</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Средняя теплоотдача</span></li>
+                            <li><i class="fa-solid fa-arrow-right"></i><span>Не искрит</span></li>
                         </ul>
                     </div>
                 </div>
@@ -406,7 +410,7 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=2.0.1"></script>
     <script>
         function initMap() {
             const locations = [
@@ -418,10 +422,10 @@
                     phone: '+371 28636469'
                 },
                 { 
-                    lat: 56.6235, 
-                    lng: 22.4789, 
+                    lat: 56.5189167, 
+                    lng: 22.3931944, 
                     title: 'Производство',
-                    address: '"Jaunērgļi", Kursīški, Saldus Municipality, LV-3890',
+                    address: '"Jaunērgļi", Kursīši, Saldus Municipality, LV-3890',
                     phone: ''
                 }
             ];
@@ -430,7 +434,7 @@
             const centerLng = locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length;
             
             const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
+                zoom: 10,
                 center: { lat: centerLat, lng: centerLng },
                 styles: [
                     { elementType: 'geometry', stylers: [{ color: '#f4f1ea' }] },

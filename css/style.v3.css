@@ -637,7 +637,7 @@ nav a:hover::after {
     color: var(--cream);
 }
 
-.product-card:hover .product-content li::before {
+.product-card:hover .product-content li i {
     color: var(--accent);
 }
 
@@ -688,18 +688,28 @@ nav a:hover::after {
 .product-content li {
     padding: 8px 0;
     padding-left: 20px;
-    position: relative;
     color: var(--text-light);
     font-size: 13px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+}
+
+.product-content li span {
+    display: flex;
+    align-items: flex-start;
 }
 
 .product-content li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
+    display: none;
+}
+
+.product-content li i {
     color: var(--accent);
-    font-weight: bold;
+    margin-right: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    flex-shrink: 0;
 }
 
 /* TECH SPECS */
@@ -736,6 +746,8 @@ nav a:hover::after {
 .spec-list li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 16px;
     padding: 16px 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
@@ -747,12 +759,15 @@ nav a:hover::after {
 .spec-list .label {
     font-weight: 600;
     color: var(--text);
+    flex-shrink: 0;
 }
 
 .spec-list .value {
     color: var(--text-light);
     font-family: 'JetBrains Mono', monospace;
     font-size: 14px;
+    flex-shrink: 0;
+    text-align: right;
 }
 
 .spec-card > p {
@@ -982,8 +997,22 @@ nav a:hover::after {
     max-height: unset !important;
 }
 
-.gm-style-iw-d {
-    padding: 20px 0 0 20px !important;
+.gm-style-iw { 
+	max-width: 280px !important; 
+}
+
+.gm-style-iw-d { 
+	padding: 15px 0 0 0 !important; 
+}
+
+.gm-style-iw button,
+.gm-style-iw button:focus,
+.gm-style-iw button:active {
+	outline: none !important;
+}
+
+.gm-style-iw * {
+	outline: none !important;
 }
 
 .map-placeholder {
@@ -1179,6 +1208,16 @@ footer {
     
     .spec-card:last-child {
         border-bottom: none;
+    }
+    
+    .spec-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .spec-list .value {
+        text-align: left;
     }
     
     .hours-grid {

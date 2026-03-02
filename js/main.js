@@ -1,3 +1,18 @@
+(function() {
+    const version = '3';
+    const links = document.querySelectorAll('link[rel="stylesheet"][href*="css/style"]');
+    links.forEach(link => {
+        const href = link.getAttribute('href').replace(/style\.v\d+\.css/, 'style.v' + version + '.css');
+        link.setAttribute('href', href);
+    });
+    
+    const scripts = document.querySelectorAll('script[src*="js/main.js"]');
+    scripts.forEach(script => {
+        const src = script.getAttribute('src').split('?')[0];
+        script.setAttribute('src', src + '?v=' + version);
+    });
+})();
+
 let lastScroll = 0;
 const header = document.querySelector('header');
 
