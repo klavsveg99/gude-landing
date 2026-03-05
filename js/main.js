@@ -1,5 +1,5 @@
 (function() {
-    const version = '3';
+    const version = '4';
     const links = document.querySelectorAll('link[rel="stylesheet"][href*="css/style"]');
     links.forEach(link => {
         const href = link.getAttribute('href').replace(/style\.v\d+\.css/, 'style.v' + version + '.css');

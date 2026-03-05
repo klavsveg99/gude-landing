@@ -163,6 +163,26 @@ header.sticky .mobile-menu-toggle {
     border-radius: 20px;
     cursor: pointer;
 	justify-content: center;
+    position: relative;
+}
+
+.logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 20px,
+            rgba(255,255,255,0.04) 20px,
+            rgba(255,255,255,0.04) 21px
+        );
+    pointer-events: none;
+    border-radius: 20px;
 }
 
 .logo-icon {
@@ -1166,6 +1186,10 @@ footer {
     
     .hero-content h1 {
         text-align: left;
+    }
+    
+    .hero h1 img {
+        margin-top: -8px !important;
     }
     
     .hero-tagline {
