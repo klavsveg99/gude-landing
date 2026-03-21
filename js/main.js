@@ -1,17 +1,172 @@
 (function() {
-    const version = '4';
-    const links = document.querySelectorAll('link[rel="stylesheet"][href*="css/style"]');
-    links.forEach(link => {
-        const href = link.getAttribute('href').replace(/style\.v\d+\.css/, 'style.v' + version + '.css');
-        link.setAttribute('href', href);
-    });
-    
-    const scripts = document.querySelectorAll('script[src*="js/main.js"]');
+    const jsVersion = '14';
+    const scripts = document.querySelectorAll('script[src*="main.js"]');
     scripts.forEach(script => {
         const src = script.getAttribute('src').split('?')[0];
-        script.setAttribute('src', src + '?v=' + version);
+        script.src = src + '?v=' + jsVersion;
     });
 })();
+
+// GOOGLE CONSENT MODE v2 - Default denied
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+
+gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'wait_for_update': 500
+});
+
+const COOKIE_CONSENT_KEY = 'gude_cookie_consent';
+const COOKIE_PREFERENCES_KEY = 'gude_cookie_preferences';
+const COOKIE_EXPIRY_DAYS = 365;
+
+class CookieConsent {
+    constructor() {
+        this.consentBanner = document.getElementById('cookieConsent');
+        this.consentModal = document.getElementById('cookieModal');
+        this.initialized = false;
+        this.init();
+    }
+    
+    init() {
+        this.attachEventListeners();
+        this.checkConsent();
+    }
+    
+    attachEventListeners() {
+        document.getElementById('cookieReject')?.addEventListener('click', () => this.rejectAll());
+        document.getElementById('cookieAcceptAll')?.addEventListener('click', () => this.acceptAll());
+        document.getElementById('cookieCustomize')?.addEventListener('click', () => this.openModal());
+        document.getElementById('cookieModalClose')?.addEventListener('click', () => this.closeModal());
+        document.getElementById('cookieModalOverlay')?.addEventListener('click', () => this.closeModal());
+        document.getElementById('cookieModalReject')?.addEventListener('click', () => this.rejectAll());
+        document.getElementById('cookieModalAccept')?.addEventListener('click', () => this.acceptAll());
+        document.getElementById('cookieModalSave')?.addEventListener('click', () => this.savePreferences());
+        document.getElementById('cookieSettings')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.openModal();
+        });
+    }
+    
+checkConsent() {
+    const consent = this.getConsent();
+    if (!consent) {
+        this.showBanner();
+    } else {
+        this.applyConsent(consent);
+        this.hideBanner();
+    }
+}
+    
+    getConsent() {
+        const cookie = document.cookie.split('; ').find(row => row.startsWith(COOKIE_CONSENT_KEY + '='));
+        if (!cookie) return null;
+        try {
+            return JSON.parse(decodeURIComponent(cookie.split('=')[1]));
+        } catch (e) {
+            return null;
+        }
+    }
+    
+showBanner() {
+    document.body.classList.remove('cookies-accepted');
+}
+
+hideBanner() {
+    document.body.classList.add('cookies-accepted');
+}
+    
+    openModal() {
+        if (this.consentModal) {
+            this.consentModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            this.loadPreferences();
+        }
+    }
+    
+    closeModal() {
+        if (this.consentModal) {
+            this.consentModal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    }
+    
+    loadPreferences() {
+        const preferences = this.getPreferences();
+        document.querySelectorAll('.category-checkbox').forEach(checkbox => {
+            const category = checkbox.getAttribute('data-category');
+            if (category === 'necessary') {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = preferences[category] || false;
+            }
+        });
+    }
+    
+    getPreferences() {
+        const cookie = document.cookie.split('; ').find(row => row.startsWith(COOKIE_PREFERENCES_KEY + '='));
+        if (!cookie) return { analytics: false, marketing: false };
+        try {
+            return JSON.parse(decodeURIComponent(cookie.split('=')[1]));
+        } catch (e) {
+            return { analytics: false, marketing: false };
+        }
+    }
+    
+    savePreferences() {
+        const preferences = {};
+        document.querySelectorAll('.category-checkbox:not(:disabled)').forEach(checkbox => {
+            const category = checkbox.getAttribute('data-category');
+            preferences[category] = checkbox.checked;
+        });
+        this.setConsent(preferences);
+        this.closeModal();
+        this.hideBanner();
+    }
+    
+    acceptAll() {
+        this.setConsent({ analytics: true, marketing: true });
+        this.closeModal();
+        this.hideBanner();
+    }
+    
+    rejectAll() {
+        this.setConsent({ analytics: false, marketing: false });
+        this.closeModal();
+        this.hideBanner();
+    }
+    
+    setConsent(preferences) {
+        const consent = {
+            necessary: true,
+            analytics: preferences.analytics || false,
+            marketing: preferences.marketing || false,
+            timestamp: new Date().getTime()
+        };
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + COOKIE_EXPIRY_DAYS);
+        document.cookie = COOKIE_CONSENT_KEY + '=' + encodeURIComponent(JSON.stringify(consent)) + '; expires=' + expiryDate.toUTCString() + '; path=/; SameSite=Lax';
+        document.cookie = COOKIE_PREFERENCES_KEY + '=' + encodeURIComponent(JSON.stringify(preferences)) + '; expires=' + expiryDate.toUTCString() + '; path=/; SameSite=Lax';
+        this.updateGoogleConsent(consent);
+    }
+    
+    updateGoogleConsent(consent) {
+        gtag('consent', 'update', {
+            'analytics_storage': consent.analytics ? 'granted' : 'denied',
+            'ad_storage': consent.marketing ? 'granted' : 'denied',
+            'ad_user_data': consent.marketing ? 'granted' : 'denied',
+            'ad_personalization': consent.marketing ? 'granted' : 'denied',
+            'page_view': consent.analytics ? 'granted' : 'denied'
+        });
+    }
+    
+    applyConsent(consent) {
+        this.updateGoogleConsent(consent);
+    }
+}
 
 let lastScroll = 0;
 const header = document.querySelector('header');
@@ -116,6 +271,25 @@ if (contactForm) {
         
         const formData = new FormData(contactForm);
         
+        const path = window.location.pathname;
+        let lang = 'lv';
+        if (path.includes('/en.html') || path.endsWith('/en')) lang = 'en';
+        else if (path.includes('/ru.html') || path.endsWith('/ru')) lang = 'ru';
+        else if (path.includes('/de.html') || path.endsWith('/de')) lang = 'de';
+        else if (path.includes('/nl.html') || path.endsWith('/nl')) lang = 'nl';
+        else if (path.includes('/da.html') || path.endsWith('/da')) lang = 'da';
+        
+        formData.append('lang', lang);
+        
+        const errorMessages = {
+            'lv': 'Kļūda nosūtot ziņojumu. Lūdzu, mēģiniet vēlreiz.',
+            'en': 'Error sending message. Please try again.',
+            'ru': 'Ошибка отправки сообщения. Пожалуйста, попробуйте еще раз.',
+            'de': 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.',
+            'nl': 'Fout bij verzenden van bericht. Probeer het opnieuw.',
+            'da': 'Fejl ved afsendelse af besked. Prøv igen.'
+        };
+        
         try {
             const response = await fetch('contact.php', {
                 method: 'POST',
@@ -132,7 +306,7 @@ if (contactForm) {
                 setTimeout(closePopup, 2000);
             }
         } catch (error) {
-            formMessage.textContent = 'Kļūda nosūtot ziņojumu. Lūdzu, mēģiniet vēlreiz.';
+            formMessage.textContent = errorMessages[lang] || errorMessages['en'];
             formMessage.className = 'form-message error';
         }
     });
@@ -168,4 +342,11 @@ const observer = new IntersectionObserver((entries) => {
 animatedElements.forEach(el => {
     el.style.animationPlayState = 'paused';
     observer.observe(el);
+});
+
+// Initialize Cookie Consent
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('cookieConsent')) {
+        new CookieConsent();
+    }
 });

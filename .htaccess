@@ -17,7 +17,8 @@
 
 <IfModule mod_headers.c>
     <FilesMatch "\.(js|css)$">
-        Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set Cache-Control "public, max-age=31536000, must-revalidate"
+        Header append Vary "Accept-Encoding"
     </FilesMatch>
     
     <FilesMatch "\.(html|htm)$">

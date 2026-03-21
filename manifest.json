@@ -1,0 +1,23 @@
+{
+  "name": "GUDE - Augstas Kvalitātes Malka",
+  "short_name": "GUDE",
+  "description": "Profesionāla kamīnmalkas ražošana un eksports kopš 2005. gada",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f4f1ea",
+  "theme_color": "#c45c26",
+  "icons": [
+    {
+      "src": "images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "images/firewood.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
