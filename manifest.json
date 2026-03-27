@@ -8,12 +8,6 @@
   "theme_color": "#c45c26",
   "icons": [
     {
-      "src": "images/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
       "src": "images/firewood.png",
       "sizes": "512x512",
       "type": "image/png",

@@ -1039,6 +1039,22 @@ body.cookies-accepted .cookie-consent {
     );
 }
 
+.product-img.wood-ash {
+    background: url('../images/trees/osis.jpeg') center/cover no-repeat;
+}
+
+.product-img.wood-oak {
+    background: url('../images/trees/ozols.jpeg') center/cover no-repeat;
+}
+
+.product-img.wood-alder {
+    background: url('../images/trees/alksnis.jpeg') center/cover no-repeat;
+}
+
+.product-img.wood-birch {
+    background: url('../images/trees/berzs.jpeg') center/cover no-repeat;
+}
+
 .product-content {
     padding: 32px 24px;
 }
