@@ -344,11 +344,22 @@ nav a:hover::after {
     align-items: center;
     background: var(--bg-dark);
     position: relative;
+    background-image: url("data:image/svg+xml,%3Csvg width='400' height='600' viewBox='0 0 400 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M200 0L280 150H240L320 300H270L380 550H20L130 300H80L160 150H120L200 0Z' fill='%23ffffff' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-position: calc(50% + 15%) 50%;
+    background-repeat: no-repeat;
+    background-size: auto 120%;
 }
 
 @media (max-width: 1300px) {
 	.hero {
 		margin-top: 64px;
+	}
+}
+
+@media (max-width: 767px) {
+	.hero {
+		background-position: 50% calc(100% + 65px);
+		background-size: auto 70%;
 	}
 }
 
@@ -732,23 +743,7 @@ body.cookies-accepted .cookie-consent {
     }
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 100px,
-            rgba(255,255,255,0.02) 100px,
-            rgba(255,255,255,0.02) 101px
-        );
-    pointer-events: none;
-}
+
 
 .hero-wrapper {
     display: flex;
