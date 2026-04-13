@@ -1,5 +1,5 @@
 (function() {
-    const jsVersion = '14';
+    const jsVersion = '16';
     const scripts = document.querySelectorAll('script[src*="main.js"]');
     scripts.forEach(script => {
         const src = script.getAttribute('src').split('?')[0];
@@ -303,7 +303,7 @@ if (contactForm) {
             
             if (result.success) {
                 contactForm.reset();
-                setTimeout(closePopup, 2000);
+                contactForm.style.display = 'none';
             }
         } catch (error) {
             formMessage.textContent = errorMessages[lang] || errorMessages['en'];

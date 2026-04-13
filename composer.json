@@ -1,0 +1,7 @@
+{
+    "name": "gude/landing",
+    "description": "GUDE Landing Website",
+    "require": {
+        "phpmailer/phpmailer": "^7.0"
+    }
+}
