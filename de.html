@@ -17,7 +17,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="GUDE">
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -398,8 +398,8 @@
         <div class="popup-content">
             <h2 class="popup-title">Holz kaufen</h2>
             <p class="popup-subtitle">Wir erhalten Ihre Anfrage und antworten innerhalb von 24 Stunden.</p>
+            <div class="form-message" id="formMessage"></div>
             <form class="popup-form" id="contactForm">
-                <div class="form-message" id="formMessage"></div>
                 <div class="form-group">
                     <label for="name">Name *</label>
                     <input type="text" id="name" name="name" required>
@@ -438,7 +438,16 @@
         </div>
     </div>
 
-    <script src="js/main.js?v=14"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECR4ZSM6DG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ECR4ZSM6DG');
+    </script>
+    <script src="js/main.js?v=19"></script>
     <script>
         function initMap() {
             const locations = [
@@ -470,13 +479,18 @@
                     { elementType: 'labels.text.fill', stylers: [{ color: '#1a1915' }] },
                     { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#ffffff' }] },
                     { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#555555' }] },
-                    { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#666666' }] },
+                    { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#a3ccff' }] },
+                    { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#0066cc' }] },
                     { featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] },
                     { featureType: 'road.highway', elementType: 'labels', stylers: [{ visibility: 'off' }] },
                     { featureType: 'road.local', elementType: 'labels', stylers: [{ visibility: 'off' }] },
                     { featureType: 'transit', elementType: 'labels', stylers: [{ visibility: 'off' }] },
                     { featureType: 'administrative', elementType: 'labels.text.fill', stylers: [{ color: '#555555' }] },
-                    { featureType: 'administrative', elementType: 'geometry.stroke', stylers: [{ color: '#cccccc' }] }
+                    { featureType: 'administrative', elementType: 'geometry.stroke', stylers: [{ color: '#cccccc' }] },
+                    { featureType: 'administrative.country', elementType: 'geometry.stroke', stylers: [{ color: '#888888', weight: 2 }] },
+                    { featureType: 'administrative.country', elementType: 'labels.text.fill', stylers: [{ color: '#666666' }] },
+                    { featureType: 'administrative.province', elementType: 'geometry.stroke', stylers: [{ color: '#aaaaaa', weight: 1 }] },
+                    { featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers: [{ color: '#555555' }] }
                 ]
             });
             
