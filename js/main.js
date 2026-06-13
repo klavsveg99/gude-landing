@@ -1,5 +1,5 @@
 (function() {
-    const jsVersion = '20';
+    const jsVersion = '22';
     const scripts = document.querySelectorAll('script[src*="main.js"]');
     scripts.forEach(script => {
         const src = script.getAttribute('src').split('?')[0];
@@ -302,6 +302,10 @@ if (contactForm) {
             formMessage.className = 'form-message ' + (result.success ? 'success' : 'error');
             
             if (result.success) {
+                gtag('event', 'form_submission', {
+                    event_category: 'contact',
+                    event_label: window.location.pathname
+                });
                 contactForm.reset();
                 contactForm.style.display = 'none';
             }
