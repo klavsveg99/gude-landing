@@ -306,6 +306,7 @@ if (contactForm) {
                     event_category: 'contact',
                     event_label: window.location.pathname
                 });
+                gtag('event', 'generate_lead');
                 contactForm.reset();
                 contactForm.style.display = 'none';
             }
