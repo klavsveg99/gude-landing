@@ -1,5 +1,5 @@
 (function() {
-    const jsVersion = '22';
+    const jsVersion = '23';
     const scripts = document.querySelectorAll('script[src*="main.js"]');
     scripts.forEach(script => {
         const src = script.getAttribute('src').split('?')[0];
@@ -347,6 +347,18 @@ const observer = new IntersectionObserver((entries) => {
 animatedElements.forEach(el => {
     el.style.animationPlayState = 'paused';
     observer.observe(el);
+});
+
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+    link.addEventListener('click', () => {
+        gtag('event', 'click_to_call');
+    });
+});
+
+document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener('click', () => {
+        gtag('event', 'email_click');
+    });
 });
 
 // Initialize Cookie Consent
