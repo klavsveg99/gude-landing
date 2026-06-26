@@ -1,5 +1,5 @@
 (function() {
-    const jsVersion = '23';
+    const jsVersion = '24';
     const scripts = document.querySelectorAll('script[src*="main.js"]');
     scripts.forEach(script => {
         const src = script.getAttribute('src').split('?')[0];
@@ -307,6 +307,7 @@ if (contactForm) {
                     event_label: window.location.pathname
                 });
                 gtag('event', 'generate_lead');
+                gtag('event', 'conversion_event_submit_lead_form');
                 contactForm.reset();
                 contactForm.style.display = 'none';
             }
