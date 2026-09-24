@@ -1,5 +1,5 @@
 (function() {
-    const jsVersion = '26';
+    const jsVersion = '27';
     const scripts = document.querySelectorAll('script[src*="main.js"]');
     scripts.forEach(script => {
         const src = script.getAttribute('src').split('?')[0];
@@ -20,6 +20,7 @@ gtag('consent', 'default', {
 });
 
 const GA_MEASUREMENT_ID = 'G-ECR4ZSM6DG';
+const GOOGLE_ADS_ID = 'AW-18236607194';
 let gaLoaded = false;
 
 function loadGoogleAnalytics() {
@@ -32,6 +33,7 @@ function loadGoogleAnalytics() {
     script.onload = function() {
         gtag('js', new Date());
         gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
+        gtag('config', GOOGLE_ADS_ID);
     };
     document.head.appendChild(script);
 }
