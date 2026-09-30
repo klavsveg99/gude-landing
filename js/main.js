@@ -1,5 +1,5 @@
 (function() {
-    const jsVersion = '28';
+    const jsVersion = '29';
     const scripts = document.querySelectorAll('script[src*="main.js"]');
     scripts.forEach(script => {
         const src = script.getAttribute('src').split('?')[0];
@@ -32,6 +32,46 @@ function trackAdsConversion(type) {
     const label = ADS_CONVERSIONS[type];
     if (label) gtag('event', 'conversion', { send_to: GOOGLE_ADS_ID + '/' + label });
 }
+
+// reCAPTCHA Enterprise (score based). The site key is public; the secret
+// key lives only on the server (private/config.php).
+const RECAPTCHA_SITE_KEY = '6Lc1TdgtAAAAAGUaImYTo91wvpKkMYMTjV-nlHLI';
+const RECAPTCHA_ACTION = 'contact_form';
+let recaptchaScriptPromise = null;
+
+function loadRecaptcha() {
+    if (window.grecaptcha && window.grecaptcha.enterprise) {
+        return Promise.resolve();
+    }
+    if (!recaptchaScriptPromise) {
+        recaptchaScriptPromise = new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://www.google.com/recaptcha/enterprise.js?render=' + RECAPTCHA_SITE_KEY;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+    return recaptchaScriptPromise;
+}
+
+function getRecaptchaToken() {
+    return loadRecaptcha().then(() => new Promise((resolve, reject) => {
+        if (!window.grecaptcha || !window.grecaptcha.enterprise) {
+            reject(new Error('reCAPTCHA unavailable'));
+            return;
+        }
+        window.grecaptcha.enterprise.ready(() => {
+            window.grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, { action: RECAPTCHA_ACTION })
+                .then(resolve)
+                .catch(reject);
+        });
+    }));
+}
+
+// Load early so reCAPTCHA can observe the session before the form is used.
+loadRecaptcha().catch(() => {});
 
 function loadGoogleAnalytics() {
     if (gaLoaded) return;
@@ -314,7 +354,7 @@ if (contactForm) {
         else if (path.includes('/da.html') || path.endsWith('/da')) lang = 'da';
         
         formData.append('lang', lang);
-        
+
         const errorMessages = {
             'lv': 'Kļūda nosūtot ziņojumu. Lūdzu, mēģiniet vēlreiz.',
             'en': 'Error sending message. Please try again.',
@@ -323,7 +363,17 @@ if (contactForm) {
             'nl': 'Fout bij verzenden van bericht. Probeer het opnieuw.',
             'da': 'Fejl ved afsendelse af besked. Prøv igen.'
         };
-        
+
+        let recaptchaToken;
+        try {
+            recaptchaToken = await getRecaptchaToken();
+        } catch (error) {
+            formMessage.textContent = errorMessages[lang] || errorMessages['en'];
+            formMessage.className = 'form-message error';
+            return;
+        }
+        formData.append('recaptchaToken', recaptchaToken);
+
         try {
             const response = await fetch('contact.php', {
                 method: 'POST',

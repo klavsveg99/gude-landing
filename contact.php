@@ -17,6 +17,40 @@ function sanitize($data) {
     return htmlspecialchars(stripslashes(trim($data)));
 }
 
+// reCAPTCHA Enterprise token verification (legacy siteverify endpoint).
+function verify_recaptcha($secret, $token, $action, $remoteip) {
+    if (empty($secret) || empty($token)) {
+        return false;
+    }
+    $ch = curl_init('https://www.google.com/recaptcha/api/siteverify');
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => http_build_query([
+            'secret' => $secret,
+            'response' => $token,
+            'remoteip' => $remoteip,
+        ]),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 5,
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    if ($response === false) {
+        return false;
+    }
+    $result = json_decode($response, true);
+    if (empty($result['success'])) {
+        return false;
+    }
+    if (isset($result['action']) && $result['action'] !== $action) {
+        return false;
+    }
+    if (isset($result['score']) && $result['score'] < 0.5) {
+        return false;
+    }
+    return true;
+}
+
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
@@ -33,12 +67,12 @@ $lang = (strpos($referer, '/en') !== false || strpos($referer, '/en?') !== false
        ((strpos($referer, '/da') !== false || strpos($referer, '/da?') !== false) ? 'da' : 'lv'))));
 
 $messages = [
-    'lv' => ['required' => 'Lūdzu, aizpildiet visus obligātos laukus.', 'invalid_email' => 'Lūdzu, ievadiet derīgu e-pasta adresi.', 'success' => 'Paldies! Jūsu ziņa ir nosūtīta. Mēs sazināsimies ar jums drīzumā.', 'error' => 'Kļūda nosūtot ziņojumu. Lūdzu, mēģiniet vēlreiz.'],
-    'en' => ['required' => 'Please fill in all required fields.', 'invalid_email' => 'Please enter a valid email address.', 'success' => 'Thank you! Your message has been sent. We will contact you soon.', 'error' => 'Error sending message. Please try again.'],
-    'ru' => ['required' => 'Пожалуйста, заполните все обязательные поля.', 'invalid_email' => 'Пожалуйста, введите корректный адрес эл. почты.', 'success' => 'Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами скоро.', 'error' => 'Ошибка отправки. Попробуйте еще раз.'],
-    'de' => ['required' => 'Bitte füllen Sie alle erforderlichen Felder aus.', 'invalid_email' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'success' => 'Vielen Dank! Ihre Nachricht wurde gesendet. Wir werden uns bald bei Ihnen melden.', 'error' => 'Fehler beim Senden. Bitte versuchen Sie es erneut.'],
-    'nl' => ['required' => 'Vul alle verplichte velden in.', 'invalid_email' => 'Voer een geldig e-mailadres in.', 'success' => 'Bedankt! Uw bericht is verzonden. Wij nemen binnenkort contact met u op.', 'error' => 'Fout bij verzenden. Probeer het opnieuw.'],
-    'da' => ['required' => 'Udfyld venligst alle påkrævede felter.', 'invalid_email' => 'Indtast en gyldig e-mailadresse.', 'success' => 'Tak! Din besked er sendt. Vi kontakter dig snart.', 'error' => 'Fejl ved afsendelse. Prøv igen.']
+    'lv' => ['required' => 'Lūdzu, aizpildiet visus obligātos laukus.', 'invalid_email' => 'Lūdzu, ievadiet derīgu e-pasta adresi.', 'captcha' => 'Lūdzu, apstipriniet, ka neesat robots, un mēģiniet vēlreiz.', 'success' => 'Paldies! Jūsu ziņa ir nosūtīta. Mēs sazināsimies ar jums drīzumā.', 'error' => 'Kļūda nosūtot ziņojumu. Lūdzu, mēģiniet vēlreiz.'],
+    'en' => ['required' => 'Please fill in all required fields.', 'invalid_email' => 'Please enter a valid email address.', 'captcha' => 'Please confirm you are not a robot and try again.', 'success' => 'Thank you! Your message has been sent. We will contact you soon.', 'error' => 'Error sending message. Please try again.'],
+    'ru' => ['required' => 'Пожалуйста, заполните все обязательные поля.', 'invalid_email' => 'Пожалуйста, введите корректный адрес эл. почты.', 'captcha' => 'Пожалуйста, подтвердите, что вы не робот, и попробуйте снова.', 'success' => 'Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами скоро.', 'error' => 'Ошибка отправки. Попробуйте еще раз.'],
+    'de' => ['required' => 'Bitte füllen Sie alle erforderlichen Felder aus.', 'invalid_email' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', 'captcha' => 'Bitte bestätigen Sie, dass Sie kein Roboter sind, und versuchen Sie es erneut.', 'success' => 'Vielen Dank! Ihre Nachricht wurde gesendet. Wir werden uns bald bei Ihnen melden.', 'error' => 'Fehler beim Senden. Bitte versuchen Sie es erneut.'],
+    'nl' => ['required' => 'Vul alle verplichte velden in.', 'invalid_email' => 'Voer een geldig e-mailadres in.', 'captcha' => 'Bevestig dat u geen robot bent en probeer het opnieuw.', 'success' => 'Bedankt! Uw bericht is verzonden. Wij nemen binnenkort contact met u op.', 'error' => 'Fout bij verzenden. Probeer het opnieuw.'],
+    'da' => ['required' => 'Udfyld venligst alle påkrævede felter.', 'invalid_email' => 'Indtast en gyldig e-mailadresse.', 'captcha' => 'Bekræft venligst, at du ikke er en robot, og prøv igen.', 'success' => 'Tak! Din besked er sendt. Vi kontakter dig snart.', 'error' => 'Fejl ved afsendelse. Prøv igen.']
 ];
 
 $t = $messages[$lang] ?? $messages['lv'];
@@ -50,6 +84,13 @@ if (empty($name) || empty($email) || empty($phone) || empty($containerType) || e
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(['success' => false, 'message' => $t['invalid_email']]);
+    exit;
+}
+
+$recaptchaSecret = $cfg['recaptchaSecret'] ?? '';
+$recaptchaToken = isset($_POST['recaptchaToken']) ? trim($_POST['recaptchaToken']) : '';
+if (!verify_recaptcha($recaptchaSecret, $recaptchaToken, 'contact_form', $_SERVER['REMOTE_ADDR'] ?? '')) {
+    echo json_encode(['success' => false, 'message' => $t['captcha']]);
     exit;
 }
 
