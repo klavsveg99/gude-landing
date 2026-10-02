@@ -2045,3 +2045,8 @@ footer {
         visibility: visible;
     }
 }
+
+/* Hide the reCAPTCHA badge */
+.grecaptcha-badge {
+    visibility: hidden !important;
+}
