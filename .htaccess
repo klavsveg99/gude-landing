@@ -29,9 +29,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Canonical host: non-www -> www
-    RewriteCond %{HTTP_HOST} ^gude\.lv$ [NC]
-    RewriteRule ^(.*)$ https://www.gude.lv/$1 [R=301,L]
+    # Canonical host: www -> non-www
+    RewriteCond %{HTTP_HOST} ^www\.gude\.lv$ [NC]
+    RewriteRule ^(.*)$ https://gude.lv/$1 [R=301,L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
