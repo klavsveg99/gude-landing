@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://gude.lv/</loc>
         <lastmod>2026-11-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
-        <xhtml:link rel="alternate" hreflang="lv" href="https://gude.lv/"/>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://gude.lv/ru.html"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://gude.lv/en.html"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://gude.lv/de.html"/>
-        <xhtml:link rel="alternate" hreflang="nl" href="https://gude.lv/nl.html"/>
-        <xhtml:link rel="alternate" hreflang="da" href="https://gude.lv/da.html"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://gude.lv/"/>
+    </url>
+    <url>
+        <loc>https://gude.lv/malka.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.95</priority>
+    </url>
+    <url>
+        <loc>https://gude.lv/malkas-eksports.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://gude.lv/malka-vairumtirdznieciba.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://gude.lv/malka-kastes.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://gude.lv/ru.html</loc>
@@ -40,30 +56,6 @@
     </url>
     <url>
         <loc>https://gude.lv/da.html</loc>
-        <lastmod>2026-11-10</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://gude.lv/malka.html</loc>
-        <lastmod>2026-11-10</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.95</priority>
-    </url>
-    <url>
-        <loc>https://gude.lv/malkas-eksports.html</loc>
-        <lastmod>2026-11-10</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://gude.lv/malka-vairumtirdznieciba.html</loc>
-        <lastmod>2026-11-10</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://gude.lv/malka-kastes.html</loc>
         <lastmod>2026-11-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
