@@ -995,6 +995,10 @@ body.cookies-accepted .cookie-consent {
     gap: 0;
 }
 
+.products-grid + .table-note {
+    margin-top: 32px;
+}
+
 .product-card {
     border: 1px solid var(--border);
     background: var(--card-bg);
